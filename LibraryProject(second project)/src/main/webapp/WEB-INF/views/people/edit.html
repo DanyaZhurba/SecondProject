@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update person</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+  <label for="name">Введіть ПІБ: </label>
+  <input type="text" th:value="${person.getSurnameNameSurname()}" th:field="*{surnameNameSurname}" id="name"/>
+  <div style="color: red" th:if="${#fields.hasErrors('surnameNameSurname')}" th:errors="*{surnameNameSurname}">Name error</div>
+  <br/>
+  <label for="age">Введіть рік народження: </label>
+  <input type="text" th:value="${person.getBirthday()}" th:field="*{birthday}" id="age"/>
+  <div style="color: red" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">Age error</div>
+  <br/>
+  <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

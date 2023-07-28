@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update book</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+  <label for="book_name">Введіть назву книги: </label>
+  <input type="text" th:value="${book.getBookName()}" th:field="*{bookName}" id="book_name"/>
+  <br/>
+  <label for="author">Введіть автора: </label>
+  <input type="text" th:value="${book.getAuthor()}" th:field="*{author}" id="author"/>
+  <br/>
+  <label for="year_production">Введіть рік: </label>
+  <input type="text" th:value="${book.getYear()}" th:field="*{year}" id="year_production"/>
+  <br/>
+  <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

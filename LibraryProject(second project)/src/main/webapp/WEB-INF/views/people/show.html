@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Дані людини</title>
+</head>
+<body>
+<a th:text="${person.getSurnameNameSurname() + ', ' + person.getBirthday()}">Person data</a>
+
+<div th:if="${books.isEmpty()}">
+    <a>Людина поки що не взяла жодної книги</a>
+    <hr/>
+    <form th:method="PATCH" th:action="@{/people/{id}/edit(id=${person.getId()})}" th:object="${person}">
+        <input type="submit" value="Редагувати"/>
+    </form>
+    <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+        <input type="submit" value="Видалити"/>
+    </form>
+</div>
+<div th:unless="${books.isEmpty()}">
+    <hr/>
+    <strong>Книги:</strong>
+    <div th:each="book : ${books}">
+        <div th:if="${book.getIfOverdue()}">
+            <a style="color: red" th:text="${book.getBookName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">Book</a>
+            <br/>
+        </div>
+
+        <div th:unless="${book.getIfOverdue()}">
+            <a th:text="${book.getBookName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">Book</a>
+            <br/>
+        </div>
+    </div>
+    <hr/>
+    <form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+        <input type="submit" value="Редагувати"/>
+    </form>
+    <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+        <input type="submit" value="Видалити"/>
+    </form>
+</div>
+
+</body>
+</html>
